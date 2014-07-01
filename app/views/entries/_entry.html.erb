@@ -1,6 +1,11 @@
 <li>
-  <span class="content"><%= entry.title %></span>
+  <span class="content"><%= link_to entry.title, entry_path(entry) %></span>
   <span class="timestamp">
     Posted at <%= entry.created_at %> .
   </span>
+  <% if current_user?(entry.user) %>
+    <%= link_to "delete", entry, method: :delete,
+                                     data: { confirm: "You sure?" },
+                                     title: entry.title %>
+  <% end %>
 </li>

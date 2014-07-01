@@ -1,6 +1,8 @@
 class EntriesController < ApplicationController
 	before_action :signed_in_user, only: [:create, :destroy]
+	 before_action :correct_user,   only: :destroy
 	def show
+		@entry = Entry.find(params[:id])
 	end
 	def new
 		if signed_in? 
@@ -15,16 +17,23 @@ class EntriesController < ApplicationController
 			flash[:success] = "Entry created!"
 			redirect_to root_url
 		else
+			@feed_items = []
 			render 'new'
 		end
 	end
 
 	def destroy
-	end
+    @entry.destroy
+    redirect_to root_url
+  end
 
 	private
 
 	def entry_params
 		params.require(:entry).permit(:body,:title)
 	end
+	def correct_user
+      @entry = current_user.entries.find_by(id: params[:id])
+      redirect_to root_url if @entry.nil?
+    end
 end
