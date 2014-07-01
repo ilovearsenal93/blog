@@ -1,5 +1,12 @@
-<li>
-  <span class="content"><%= @entry.title %></span>
+<div class="row">
+    <aside class="span4">
+      <section>
+        <%= render @user %>
+      </section>
+    </aside>
+    <div class="span8">
+      <li>
+  <span class="content"><h3><%= @entry.title %></h3></span>
   <span class="content"><%= @entry.body %></span>
   <span class="timestamp">
     Posted at <%= @entry.created_at %> .
@@ -10,3 +17,5 @@
                                      title: @entry.title %>
   <% end %>
 </li>
+    </div>
+  </div>

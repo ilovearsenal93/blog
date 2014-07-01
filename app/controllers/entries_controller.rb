@@ -3,6 +3,7 @@ class EntriesController < ApplicationController
 	 before_action :correct_user,   only: :destroy
 	def show
 		@entry = Entry.find(params[:id])
+		@user = @entry.user
 	end
 	def new
 		if signed_in? 
