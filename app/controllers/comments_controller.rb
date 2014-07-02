@@ -12,7 +12,6 @@ class CommentsController < ApplicationController
   def new
   end
   def show
-    @entries= current_entry.comments.all
   end
   def destroy
   end
