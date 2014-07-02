@@ -16,6 +16,13 @@
                                      data: { confirm: "You sure?" },
                                      title: @entry.title %>
   <% end %>
+  <% if @entry.comments.any? %>
+      <ol class="microposts">
+        <%= render @comments %>
+      </ol>
+      <%= will_paginate @comments %>
+    <% end %>
+ 
 </li>
     </div>
   </div>

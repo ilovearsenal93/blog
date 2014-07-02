@@ -4,6 +4,7 @@ namespace :db do
     make_users
     make_entries
     make_relationships
+    make_comments
   end
 end
 
@@ -30,6 +31,20 @@ def make_entries
       title = Faker::Lorem.sentence(1)
       content = Faker::Lorem.sentence(150)
       users.each { |user| user.entries.create!(title: title, body: content) }
+    end
+end
+def make_comments
+  entries = Entry.all(limit: 6)
+    50.times do
+      content = Faker::Lorem.sentence(20)
+      entries.each do 
+        |entry|
+        users= User.all(limit:6)
+        users.each do
+          |user|
+         Comment.create!(content:content,user_id: user.id,entry_id:entry.id) 
+       end
+      end
     end
 end
 
