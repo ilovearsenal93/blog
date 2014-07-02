@@ -2,8 +2,7 @@ class CommentsController < ApplicationController
   def index
   end
   def create  
-    @comment = current_entry.comments.build!(comment_params)
-    @comment.user_id= current_user
+    @comment = Comment.create(content:comment_params,user_id:current_user.id,entry_id:current_entry.id)
     if @comment.save
       redirect_to entry_path(current_entry)
     else
